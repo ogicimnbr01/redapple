@@ -1428,7 +1428,7 @@ export const INITIAL_COUNTRIES: Record<string, Country> = {
   "BOH": {
     "tag": "BOH",
     "name": "Bohemia",
-    "color": "#f9ebd2",
+    "color": "#85929e",
     "religion": "Catholic",
     "techGroup": "Western",
     "techLevels": {
@@ -1512,7 +1512,7 @@ export const INITIAL_COUNTRIES: Record<string, Country> = {
   "HUN": {
     "tag": "HUN",
     "name": "Hungary",
-    "color": "#fadbd8",
+    "color": "#d9534f",
     "religion": "Catholic",
     "techGroup": "Western",
     "techLevels": {
@@ -1966,7 +1966,7 @@ export const INITIAL_COUNTRIES: Record<string, Country> = {
   "TUR": {
     "tag": "TUR",
     "name": "Ottomans",
-    "color": "#1e8449",
+    "color": "#c0392b",
     "religion": "Sunni",
     "techGroup": "Anatolian",
     "techLevels": {
@@ -2389,7 +2389,7 @@ export const INITIAL_COUNTRIES: Record<string, Country> = {
   "ALB": {
     "tag": "ALB",
     "name": "Albania",
-    "color": "#c0392b",
+    "color": "#1e8449",
     "religion": "Orthodox",
     "techGroup": "Eastern",
     "techLevels": {
