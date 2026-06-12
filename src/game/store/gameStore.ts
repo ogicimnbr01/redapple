@@ -832,9 +832,9 @@ export const useGameStore = create<GameState>()(
     {
       name: 'imperium-chronicles-save',
       storage: createJSONStorage(() => capacitorStorage),
-      version: 12, // saveVersion tracking for migrations
+      version: 13, // saveVersion tracking for migrations
       migrate: (persistedState: any, version: number) => {
-        if (version < 12) {
+        if (version < 13) {
           console.warn("Outdated save version, resetting state to initial values.");
           return {
             date: { year: 1444, month: 11, day: 11 },
