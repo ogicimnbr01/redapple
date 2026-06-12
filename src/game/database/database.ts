@@ -7,7 +7,8 @@ export const ADJACENCY_GRAPH: Record<string, string[]> = {
     "pest",
     "venice",
     "mantua",
-    "milan"
+    "milan",
+    "north_italy_austuria"
   ],
   "prague": [
     "silesia",
@@ -31,7 +32,8 @@ export const ADJACENCY_GRAPH: Record<string, string[]> = {
     "pest",
     "belgrade",
     "bosna",
-    "venice"
+    "venice",
+    "istria"
   ],
   "targoviste": [
     "transylvania",
@@ -100,9 +102,9 @@ export const ADJACENCY_GRAPH: Record<string, string[]> = {
     "macedonia",
     "constantinople"
   ],
-  "venice": ["ferrara", "mantua", "croatia", "vienna"],
-  "milan": ["mantua", "vienna", "genoa", "switzerland", "savoy"],
-  "mantua": ["venice", "milan", "ferrara", "vienna"],
+  "venice": ["ferrara", "mantua", "croatia", "vienna", "istria"],
+  "milan": ["mantua", "vienna", "genoa", "switzerland", "savoy", "north_italy_austuria"],
+  "mantua": ["venice", "milan", "ferrara", "vienna", "north_italy_austuria"],
   "ferrara": ["venice", "mantua", "florence", "genoa", "rome"],
   "florence": ["ferrara", "siena", "rome", "genoa"],
   "siena": ["florence", "rome", "genoa_sardinia"],
@@ -112,7 +114,9 @@ export const ADJACENCY_GRAPH: Record<string, string[]> = {
   "naples": ["rome", "naples_sardinia"],
   "naples_sardinia": ["naples", "genoa_sardinia"],
   "savoy": ["milan", "genoa", "switzerland"],
-  "switzerland": ["milan", "genoa", "savoy"]
+  "switzerland": ["milan", "genoa", "savoy"],
+  "north_italy_austuria": ["istria", "mantua", "milan", "vienna"],
+  "istria": ["croatia", "venice", "north_italy_austuria"]
 };
 
 // Static physical capitals coordinates on our SVG map viewport
@@ -214,7 +218,9 @@ export const PROVINCE_COORDINATES: Record<string, { x: number; y: number }> = {
   "naples_sardinia": { "x": 234, "y": 378 },
   "savoy": { "x": 213, "y": 233 },
 "switzerland": { "x": 244, "y": 203 }
-};
+,
+  "north_italy_austuria": { "x": 288, "y": 206 },
+  "istria": { "x": 220, "y": 270 }};
 
 export const INITIAL_PROVINCES: Record<string, Province> = {
   "vienna": {
@@ -229,7 +235,11 @@ export const INITIAL_PROVINCES: Record<string, Province> = {
     "terrain": "Plains",
     "adjacentProvinces": [
       "prague",
-      "pest"
+      "pest",
+      "venice",
+      "mantua",
+      "milan",
+      "north_italy_austuria"
     ],
     "development": {
       "adm": 6,
@@ -412,7 +422,9 @@ export const INITIAL_PROVINCES: Record<string, Province> = {
     "adjacentProvinces": [
       "pest",
       "belgrade",
-      "bosna"
+      "bosna",
+      "venice",
+      "istria"
     ],
     "development": {
       "adm": 2,
@@ -998,7 +1010,7 @@ export const INITIAL_PROVINCES: Record<string, Province> = {
     "culture": "Venetian",
     "religion": "Catholic",
     "terrain": "Plains",
-    "adjacentProvinces": ["venice", "ferrara", "mantua"],
+    "adjacentProvinces": ["venice", "ferrara", "mantua", "istria"],
     "development": { "adm": 7, "dip": 8, "mil": 4 },
     "cores": ["VEN"],
     "claims": [],
@@ -1020,7 +1032,7 @@ export const INITIAL_PROVINCES: Record<string, Province> = {
     "culture": "Lombard",
     "religion": "Catholic",
     "terrain": "Plains",
-    "adjacentProvinces": ["mantua", "vienna", "genoa", "switzerland", "savoy"],
+    "adjacentProvinces": ["mantua", "vienna", "genoa", "switzerland", "savoy", "north_italy_austuria"],
     "development": { "adm": 5, "dip": 5, "mil": 4 },
     "cores": ["MLN"],
     "claims": [],
@@ -1042,7 +1054,7 @@ export const INITIAL_PROVINCES: Record<string, Province> = {
     "culture": "Lombard",
     "religion": "Catholic",
     "terrain": "Plains",
-    "adjacentProvinces": ["venice", "milan", "ferrara", "vienna"],
+    "adjacentProvinces": ["venice", "milan", "ferrara", "vienna", "north_italy_austuria"],
     "development": { "adm": 3, "dip": 3, "mil": 2 },
     "cores": ["MNT"],
     "claims": [],
@@ -1273,7 +1285,51 @@ export const INITIAL_PROVINCES: Record<string, Province> = {
     "rebelProgress": 0,
     "rebelType": "None",
     "buildings": { "workshop": false, "church": false, "barracks": false, "fort": true }
-  }
+  },
+  "north_italy_austuria": {
+    "id": "north_italy_austuria",
+    "name": "Trentino",
+    "owner": "HAB",
+    "controller": "HAB",
+    "isHreProvince": true,
+    "isCapital": false,
+    "culture": "Austrian",
+    "religion": "Catholic",
+    "terrain": "Mountains",
+    "adjacentProvinces": ["istria", "mantua", "milan", "vienna"],
+    "development": { "adm": 3, "dip": 2, "mil": 2 },
+    "cores": ["HAB"],
+    "claims": [],
+    "coringProgress": null,
+    "autonomy": 20,
+    "minimumAutonomy": 0,
+    "unrest": 0,
+    "rebelProgress": 0,
+    "rebelType": "None",
+    "buildings": { "workshop": false, "church": false, "barracks": false, "fort": false }
+  },
+  "istria": {
+    "id": "istria",
+    "name": "Istria",
+    "owner": "VEN",
+    "controller": "VEN",
+    "isHreProvince": true,
+    "isCapital": false,
+    "culture": "Venetian",
+    "religion": "Catholic",
+    "terrain": "Hills",
+    "adjacentProvinces": ["croatia", "venice", "north_italy_austuria"],
+    "development": { "adm": 2, "dip": 3, "mil": 2 },
+    "cores": ["VEN"],
+    "claims": [],
+    "coringProgress": null,
+    "autonomy": 15,
+    "minimumAutonomy": 0,
+    "unrest": 0,
+    "rebelProgress": 0,
+    "rebelType": "None",
+    "buildings": { "workshop": false, "church": false, "barracks": false, "fort": false }
+  },
 };
 
 export const INITIAL_COUNTRIES: Record<string, Country> = {

@@ -550,6 +550,26 @@ export const useGameStore = create<GameState>()(
         set((state: any) => {
           const army = state.armies[armyId];
           if (army && !army.isRetreating) {
+            const isAtWar = (tagA: string, tagB: string) => {
+              return Object.values(state.wars).some((war: any) => {
+                const sideA = [war.attacker, ...war.attackerAllies];
+                const sideB = [war.defender, ...war.defenderAllies];
+                return (sideA.includes(tagA) && sideB.includes(tagB)) || (sideA.includes(tagB) && sideB.includes(tagA));
+              });
+            };
+
+            const isPathBlocked = path.some(pId => {
+              const p = state.provinces[pId];
+              if (!p) return true;
+              return p.owner !== army.owner && p.controller !== army.owner && !isAtWar(army.owner, p.owner) && !isAtWar(army.owner, p.controller);
+            });
+
+            if (isPathBlocked) {
+              state.historyLog.unshift(`Cannot move army to/through foreign territory without being at war.`);
+              if (state.historyLog.length > 50) state.historyLog.pop();
+              return;
+            }
+
             army.path = path;
             army.targetProvinceId = targetProvinceId;
             army.travelProgress = 0;
@@ -812,9 +832,9 @@ export const useGameStore = create<GameState>()(
     {
       name: 'imperium-chronicles-save',
       storage: createJSONStorage(() => capacitorStorage),
-      version: 11, // saveVersion tracking for migrations
+      version: 12, // saveVersion tracking for migrations
       migrate: (persistedState: any, version: number) => {
-        if (version < 11) {
+        if (version < 12) {
           console.warn("Outdated save version, resetting state to initial values.");
           return {
             date: { year: 1444, month: 11, day: 11 },
