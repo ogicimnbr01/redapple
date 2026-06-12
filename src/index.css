@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=IM+Fell+DW+Pica&family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+  --font-title: 'Cinzel', serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-map: 'IM Fell DW Pica', serif;
+  
+  /* EU4 Royal Palette - Exact HEX colors from design mock */
+  --bg-dark: #07090e;
+  --bg-parchment: #0f131a;
+  --bg-parchment-light: #161c24;
+  --bg-ocean: #0a0d13;
+  
+  /* Borders & Gold Trims */
+  --border-gold: #d4af37; /* Accent Gold */
+  --border-gold-dark: #8c6d39;
+  --border-wood: #2a2015;
+  --border-light: rgba(212, 175, 55, 0.15);
+  --border-active: rgba(212, 175, 55, 0.4);
+  
+  /* EU4 Power Mana Colors */
+  --color-adm: #e74c3c;
+  --color-adm-glow: rgba(231, 76, 60, 0.25);
+  --color-dip: #3498db;
+  --color-dip-glow: rgba(52, 152, 219, 0.25);
+  --color-mil: #2ecc71;
+  --color-mil-glow: rgba(46, 204, 113, 0.25);
+  --color-gold: #f39c12;
+  
+  /* Game Stats Colors */
+  --color-unrest: #e74c3c;
+  --color-prestige: #9b59b6;
+  --color-stability: #2ecc71;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #f5eedc; /* Cream color text */
+  font-family: var(--font-body);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Scrollbars - Wooden/Gold Style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090c10;
+  border-left: 1px solid var(--border-wood);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-gold-dark);
+  border: 1px solid var(--border-wood);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-gold);
+}
+
+/* EU4 Royal Buttons & Variants */
+button {
+  background: linear-gradient(to bottom, #2c3848, #18202c);
+  border: 1px solid var(--border-gold-dark);
+  color: #f3e5c8;
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #38475b, #1d2837);
+  border-color: var(--border-gold);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+button:active:not(:disabled) {
+  background: #10161f;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+button:disabled {
+  opacity: 0.35;
+  filter: grayscale(80%);
+  cursor: not-allowed;
+  border-color: #444;
+  color: #888;
+}
+
+/* Button Semantic Variants */
+button.primary {
+  background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+  border-color: #4caf50;
+  color: #e8f5e9;
+}
+button.primary:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #388e3c, #2e7d32);
+  border-color: #81c784;
+}
+
+button.danger {
+  background: linear-gradient(to bottom, #c62828, #b71c1c);
+  border-color: #ef5350;
+  color: #ffebee;
+}
+button.danger:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #d32f2f, #c62828);
+  border-color: #e57373;
+}
+
+button.secondary {
+  background: linear-gradient(to bottom, #37474f, #263238);
+  border-color: #546e7a;
+  color: #eceff1;
+}
+button.secondary:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #455a64, #37474f);
+  border-color: #78909c;
+}
+
+
+/* Royal Parchment Panels */
+.glass-panel {
+  background: linear-gradient(135deg, var(--bg-parchment) 0%, var(--bg-dark) 100%);
+  border: 2px solid var(--border-gold-dark) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(212, 175, 55, 0.05);
+  transition: border-color 0.25s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--border-gold) !important;
+}
+
+
+/* Layout Slots */
+#game-root {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: var(--bg-dark);
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  background: var(--bg-ocean);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+}
+
+/* Tooltip & Popups */
+.custom-tooltip {
+  position: absolute;
+  z-index: 1000;
+  background: #0f131a;
+  border: 1.5px solid var(--border-gold);
+  border-radius: 3px;
+  padding: 10px 14px;
+  pointer-events: none;
+  font-size: 0.85rem;
+  color: #f3e5c8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0% { stroke: var(--border-gold-dark); stroke-width: 2.5px; filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.5)); }
+  50% { stroke: #fff; stroke-width: 3.5px; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)); }
+  100% { stroke: var(--border-gold-dark); stroke-width: 2.5px; filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.5)); }
+}
+
+.pulse-marker {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-marker {
+  animation: spin 12s linear infinite;
+}
