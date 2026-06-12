@@ -105,16 +105,14 @@ export const Map: React.FC<MapProps> = ({
 
   const visibleProvinceIds = new Set<string>();
 
-  // 1. Oyuncunun kendi/işgal ettiği toprakları ve onların komşularını ekle
+  // 1. Oyuncunun kendi/işgal ettiği toprakları ekle
   playerProvinces.forEach(p => {
     visibleProvinceIds.add(p.id);
-    (ADJACENCY_GRAPH[p.id] || []).forEach(adjId => visibleProvinceIds.add(adjId));
   });
 
-  // 2. Oyuncunun ordularının olduğu toprakları ve onların komşularını ekle
+  // 2. Oyuncunun ordularının olduğu toprakları ekle
   playerArmyProvinces.forEach(id => {
     visibleProvinceIds.add(id);
-    (ADJACENCY_GRAPH[id] || []).forEach(adjId => visibleProvinceIds.add(adjId));
   });
 
   // 3. Casus ağı gücü %60 veya daha fazla olan ülkelerin topraklarını ekle
